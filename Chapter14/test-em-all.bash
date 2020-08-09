@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 #
 # ./grdelw clean build
+sh gradlew clean build
+cd /home/laidongs-cn.ibm.com/github/Hands-On-Microservices-with-Spring-Boot-and-Spring-Cloud/Chapter14
 # docker-compose build
 # docker-compose up -d
 #
