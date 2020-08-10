@@ -17,7 +17,7 @@ spec:
       containers:
       - name: comp
         image: hands-on/product-composite-service
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: "docker"
