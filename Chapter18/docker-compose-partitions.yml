@@ -238,4 +238,4 @@ services:
 
 networks:
   my-network:
-    name: my-network
+ #   name: my-network
