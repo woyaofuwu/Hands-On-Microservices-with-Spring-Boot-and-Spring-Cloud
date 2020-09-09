@@ -1,0 +1,45 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: review-build
+  namespace: test2
+  labels:
+    app: review
+    app.kubernetes.io/component: review
+    app.kubernetes.io/instance: review
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'review:latest'
+  resources: {}
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  strategy:
+    type: Source
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: 'springboot-maven3-centos:latest'
+  postCommit: {}
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/woyaofuwu/Hands-On-Microservices-with-Spring-Boot-and-Spring-Cloud.git'
+    contextDir: Chapter18/microservices/review-service
+  triggers:
+    - type: GitHub
+      github:
+        secret: 0j0O5h6cXYzkTZFPL1ZA
+    - type: Generic
+      generic:
+        secret: 634s9LJFglL9r2AfKwbB
+    - type: ConfigChange
+    - type: ImageChange
+      imageChange:
+        lastTriggeredImageID: >-
+          codecentric/springboot-maven3-centos@sha256:91ecee201c42cfde8616dfe7b5c77c4f6100f95f50c6e8ffe16a78c99dde59bf
+  runPolicy: Serial
