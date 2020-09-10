@@ -15,7 +15,7 @@ spec:
       containers:
       - name: gateway
         image: hands-on/gateway
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
         env:
           - name: SPRING_PROFILES_ACTIVE
             value: "docker"

@@ -15,7 +15,7 @@ spec:
       containers:
       - name: auth-server
         image: hands-on/auth-server
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
         env:
           - name: SPRING_PROFILES_ACTIVE
             value: "docker"
