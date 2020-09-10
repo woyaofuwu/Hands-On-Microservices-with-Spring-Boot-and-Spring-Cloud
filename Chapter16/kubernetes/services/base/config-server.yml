@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: config-server
-        image: hands-on/config-server
+        image: robin9999/config-server
         imagePullPolicy: IfNotPresent
         env:
           - name: SPRING_PROFILES_ACTIVE

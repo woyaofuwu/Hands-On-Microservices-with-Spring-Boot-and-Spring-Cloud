@@ -37,6 +37,33 @@ docker pull mongo:3.6.9
 docker pull rabbitmq:3.7.8-management
 docker pull openzipkin/zipkin:2.12.9
 
+
+sudo docker login 
+sudo docker image tag hands-on/recommendation-service docker.io/robin9999/recommendation-service
+sudo docker push docker.io/robin9999/recommendation-service
+
+sudo docker image tag hands-on/product-service docker.io/robin9999/product-service
+sudo docker push docker.io/robin9999/product-service
+
+sudo docker image tag hands-on/review-service docker.io/robin9999/review-service
+sudo docker push docker.io/robin9999/review-service
+
+sudo  docker image tag hands-on/product-composite-service docker.io/robin9999/product-composite-service
+sudo  docker push docker.io/robin9999/product-composite-service
+
+sudo  docker image tag hands-on/config-server docker.io/robin9999/config-server
+sudo  docker push docker.io/robin9999/config-server
+
+sudo  docker image tag hands-on/auth-server docker.io/robin9999/auth-server
+sudo  docker push docker.io/robin9999/auth-server
+
+
+sudo  docker image tag hands-on/gateway docker.io/robin9999/gateway
+sudo  docker push docker.io/robin9999/gateway
+
+
+sudo  docker image tag vuegatewayv4 robin9999/vuegatewayv4
+
 kubectl apply -k kubernetes/services/overlays/dev
 kubectl wait --timeout=600s --for=condition=ready pod --all
 kubectl get pods -o json | jq .items[].spec.containers[].image

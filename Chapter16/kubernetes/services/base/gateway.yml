@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: gateway
-        image: hands-on/gateway
+        image: robin9999/gateway
         imagePullPolicy: IfNotPresent
         env:
           - name: SPRING_PROFILES_ACTIVE

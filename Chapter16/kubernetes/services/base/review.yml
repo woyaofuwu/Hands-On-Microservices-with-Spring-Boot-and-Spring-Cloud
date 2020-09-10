@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: rev
-        image: hands-on/review-service
+        image: robin9999/review-service
         imagePullPolicy: IfNotPresent
         env:
           - name: SPRING_PROFILES_ACTIVE

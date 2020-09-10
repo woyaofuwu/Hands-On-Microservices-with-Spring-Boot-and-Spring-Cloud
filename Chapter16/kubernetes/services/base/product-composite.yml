@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: comp
-        image: hands-on/product-composite-service
+        image: robin9999/product-composite-service
         imagePullPolicy: IfNotPresent
         env:
           - name: SPRING_PROFILES_ACTIVE
