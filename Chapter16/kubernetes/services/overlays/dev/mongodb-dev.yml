@@ -12,6 +12,10 @@ spec:
       labels:
         app: mongodb
     spec:
+      volumes:
+        - name: mongodb-data
+          persistentVolumeClaim:
+            claimName: mongodb
       containers:
         - name: mongodb
           image: mongo:3.6.9

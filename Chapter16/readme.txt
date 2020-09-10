@@ -63,6 +63,31 @@ sudo  docker push docker.io/robin9999/gateway
 
 kubectl apply -k kubernetes/services/overlays/dev
 
+ oc logs -f pod/
+
+kubectl delete deployment/mongodb
+ #改用ocp自带mongodb (使用模板创建)
+kubectl delete dc/mongodb
+ oc delete service/mongodb
+kubectl apply -f kubernetes/services/overlays/dev/mongodb-dev.yml
+
+kubectl delete deployment/recommendation
+kubectl apply -f kubernetes/services/base/recommendation.yml
+
+kubectl delete deployment/review
+kubectl apply -f kubernetes/services/base/review.yml
+
+问题：默认ocp中不能使用80端口f->增加scc anyuid 到 default 删除deployment再重建
+oc adm policy add-scc-to-user anyuid  -z default -n hands-on
+kubectl delete deployment/auth-server
+kubectl apply -f kubernetes/services/base/auth-server.yml
+
+kubectl delete deployment/product
+kubectl apply -f kubernetes/services/base/product.yml
+
+kubectl delete deployment/product-composite
+kubectl apply -f kubernetes/services/base/product-composite.yml
+
 kubectl wait --timeout=600s --for=condition=ready pod --all
 kubectl get pods -o json | jq .items[].spec.containers[].image
 
