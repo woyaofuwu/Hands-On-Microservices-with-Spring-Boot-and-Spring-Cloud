@@ -65,9 +65,9 @@ kubectl apply -k kubernetes/services/overlays/dev
 
  oc logs -f pod/
 
-kubectl delete deployment/mongodb
+kubectl delete deployment/mongodb #无pvc默认无法写导致无法确定mongodb
  #改用ocp自带mongodb (使用模板创建)
-kubectl delete dc/mongodb
+kubectl delete dc/mongodb #模板创建无法使用，重新使用原来yaml，借用模板创建的PVC
  oc delete service/mongodb
 kubectl apply -f kubernetes/services/overlays/dev/mongodb-dev.yml
 
@@ -92,7 +92,18 @@ kubectl wait --timeout=600s --for=condition=ready pod --all
 kubectl get pods -o json | jq .items[].spec.containers[].image
 
 EXEC="docker run --rm -it --network=my-network alpine"
+kubectl get pod -l app=product -o jsonpath='{.items[*].spec.containers[*].image} '
+kubectl get pod -l app=product -w
 
+change yaml  
+kubectl apply -k kubernetes/services/overlays/prod
+
+kubectl set image deployment/product pro=hands-on/product-service:v3
+kubectl set image deployment/product pro=hands-on/product-service:v2
+
+kubectl rollout history deployment product
+kubectl rollout history deployment product --revision=2
+kubectl rollout undo deployment product --to-revision=2
 
  oc new-app --name review-service  --insecure-registry  https://github.com/woyaofuwu/Hands-On-Microservices-with-Spring-Boot-and-Spring-Cloud.git --context-dir=Chapter18/microservices/review-service 
 
