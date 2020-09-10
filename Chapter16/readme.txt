@@ -61,10 +61,8 @@ sudo  docker push docker.io/robin9999/auth-server
 sudo  docker image tag hands-on/gateway docker.io/robin9999/gateway
 sudo  docker push docker.io/robin9999/gateway
 
-
-sudo  docker image tag vuegatewayv4 robin9999/vuegatewayv4
-
 kubectl apply -k kubernetes/services/overlays/dev
+
 kubectl wait --timeout=600s --for=condition=ready pod --all
 kubectl get pods -o json | jq .items[].spec.containers[].image
 
